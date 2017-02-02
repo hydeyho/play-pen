@@ -10,6 +10,7 @@ namespace Patterns.NewsReader
         public void Construct(NewsReaderBuilder newsReaderBuilder)
         {
             newsReaderBuilder.BuildXsdPath();
+            newsReaderBuilder.BuildSaveBookmark();
             newsReaderBuilder.BuildAsset();
         }
     }

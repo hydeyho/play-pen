@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Patterns.Asset;
 using Patterns.NewsReader;
 
 namespace Patterns
@@ -10,20 +11,12 @@ namespace Patterns
     {
         public Class1()
         {
-            NewsReaderBuilder builder;
             var config = new Config.Config();
-
             var director = new NewsReaderDirector();
+            var asset = AssetEnum.Diagnostic;
 
-            builder = new DiagnosticNewsReaderBuilder(config);
-            director.Construct(builder);
-            builder.NewsReader.Execute();
-
-            builder = new FuelNewsReaderBuilder(config);
-            director.Construct(builder);
-            builder.NewsReader.Execute();
-
-            builder = new EventNewsReaderBuilder(config);
+            var builderFactory = new NewsReaderBuilderFactory();
+            var builder = builderFactory.GetConcreteBuilder(asset, config);
             director.Construct(builder);
             builder.NewsReader.Execute();
         }
